@@ -1,0 +1,1 @@
+helm upgrade --install chartmuseum . --set global.hostpat=/run/desktop/mnt/host/e/Dev/Project/personal-assistant/local4k8s --set securityContext.runAsUser=0 --set securityContext.runAsGroup=0 --set securityContext.runAsNonRoot=false
