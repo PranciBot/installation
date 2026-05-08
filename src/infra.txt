@@ -1,7 +1,11 @@
-helm upgrade -i infra-storage /home/dthvinh/code/my-projects/prancibot/infra-storage/deploy/chart/ --set persistent.hostpath=/home/dthvinh/code/my-projects/prancibot/.local-dev/mountData
+helm upgrade -i infra-storage /mnt/e/Dev/Project/personal-assistant/infra-storage/deploy/chart/ --set persistent.hostpath=/home/dthvinh/local/mount/personal-asssitant
 
-helm upgrade -i infra /home/dthvinh/code/my-projects/prancibot/infra/deploy/chart/ \
+helm upgrade -i infra /mnt/e/Dev/Project/personal-assistant/infra/deploy/chart/ \
     --set persistent-storage.primary.persistence.existingClaim=infra-storage-postgres-pvc \
-    --set lifestyle-service.image.registry=localhost:5000 \
     --set lifestyle-service.image.group=$(whoami) \
-    --set event-dispatcher.kafka.externalAdvertisedHost=192.168.138.136
+    --set event-dispatcher.kafka.externalAdvertisedHost=localhost \
+    --set platform-gateway.gateway.proxy.type=LoadBalancer
+
+helm upgrade -i apps /mnt/e/Dev/Project/personal-assistant/apps/deploy/chart/ \
+    --set global.infraName=infra \
+    --set lifestyle-service.image.group=$(whoami)
